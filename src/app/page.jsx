@@ -1,5 +1,6 @@
 import AboutSection from "@/components/AboutSection";
 import CaregiverSlider from "@/components/CaregiverSlider";
+import Navbar from "@/components/navbar/NavBar";
 import ServicesSection from "@/components/ServicesSection";
 import Testimonials from "@/components/Testimonials";
 import Image from "next/image";

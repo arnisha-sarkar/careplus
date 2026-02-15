@@ -14,14 +14,14 @@ const slides = [
     id: 1,
     title: "Compassion is Our Calling",
     desc: "We don't just provide care; we stand by you like family, ensuring comfort and dignity in every step.",
-    bg: "https://images.unsplash.com/photo-1576765608596-5889270741e0?q=80&w=1470&auto=format&fit=crop",
+    bg: "https://images.unsplash.com/photo-1516733725897-1aa73b87c8e8?q=80&w=1470&auto=format&fit=crop",
     btnText: "Explore Our Services",
   },
   {
     id: 2,
     title: "Exceptional Care for Your Loved Ones",
     desc: "Ensure a safe and healthy life with our skilled, compassionate, and professional caregivers.",
-    bg: "https://images.unsplash.com/photo-1581578731522-a20478d45903?q=80&w=1470&auto=format&fit=crop",
+    bg: "https://images.unsplash.com/photo-1516733725897-1aa73b87c8e8?q=80&w=1470&auto=format&fit=crop",
     btnText: "Book an Appointment",
   },
   {
