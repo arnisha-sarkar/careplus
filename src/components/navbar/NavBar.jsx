@@ -1,3 +1,78 @@
+"use client";
+import React from "react";
+import Link from "next/link";
+import { useSession, signOut } from "next-auth/react"; // নেক্সট-অথ এর হুক
+
+export default function Navbar() {
+  // সেশন থেকে ডাটা এবং স্ট্যাটাস বের করে আনা
+  const { data: session, status } = useSession();
+
+  return (
+    <nav className="bg-white border-b border-slate-200 sticky top-0 z-50 shadow-sm">
+      <div className="container mx-auto px-6 h-20 flex items-center justify-between">
+        {/* Logo */}
+        <Link href="/" className="text-2xl font-black text-slate-900">
+          CARE<span className="text-teal-600">PLUS</span>
+        </Link>
+
+        {/* Desktop Menu - এখানে gap-8 যোগ করা হয়েছে */}
+        <div className="flex items-center gap-8">
+          <Link
+            href="/"
+            className="font-bold text-slate-600 hover:text-teal-600 transition-colors"
+          >
+            Home
+          </Link>
+
+          {/* কন্ডিশনাল রেন্ডারিং */}
+          {status === "authenticated" ? (
+            <>
+              <Link
+                href="/my-bookings"
+                className="font-bold text-slate-600 hover:text-teal-600 transition-colors"
+              >
+                My Bookings
+              </Link>
+
+              {/* লগআউট সেকশন - এখানেও gap-4 দেওয়া হয়েছে */}
+              <div className="flex items-center gap-4 border-l pl-8 border-slate-200">
+                {/* <span className="text-sm font-medium text-slate-500 hidden md:block">
+              Hi, {session?.user?.name?.split(" ")[0]}
+            </span> */}
+
+                <button
+                  onClick={() => signOut({ callbackUrl: "/login" })}
+                  className="bg-red-50 text-slate-600  px-5 py-2 rounded-xl font-bold hover:bg-red-100 transition-all"
+                >
+                  Logout
+                </button>
+              </div>
+            </>
+          ) : (
+            status !== "loading" && (
+              /* লগইন না থাকলে - এখানেও gap-6 কাজ করবে */
+              <div className="flex items-center gap-8">
+                <Link
+                  href="/login"
+                  className="font-bold text-slate-600 hover:text-teal-600 transition-colors"
+                >
+                  Login
+                </Link>
+                {/* <Link
+                  href="/register"
+                  className="bg-slate-900 text-white px-6 py-2.5 rounded-xl font-bold hover:bg-teal-600 transition-all"
+                >
+                  Register
+                </Link> */}
+              </div>
+            )
+          )}
+        </div>
+      </div>
+    </nav>
+  );
+}
+
 // // "use client";
 
 // // import Link from "next/link";
@@ -145,79 +220,3 @@
 //     </nav>
 //   );
 // }
-
-"use client";
-import React from "react";
-import Link from "next/link";
-import { useSession, signOut } from "next-auth/react"; // নেক্সট-অথ এর হুক
-
-export default function Navbar() {
-  // সেশন থেকে ডাটা এবং স্ট্যাটাস বের করে আনা
-  const { data: session, status } = useSession();
-
-  return (
-    <nav className="bg-white border-b border-slate-200 sticky top-0 z-50 shadow-sm">
-      <div className="container mx-auto px-6 h-20 flex items-center justify-between">
-        {/* Logo */}
-        <Link href="/" className="text-2xl font-black text-slate-900">
-          CARE<span className="text-teal-600">GIVE</span>
-        </Link>
-
-        {/* Desktop Menu */}
-        <div className="flex items-center">
-          <Link
-            href="/"
-            className="font-bold text-slate-600 hover:text-teal-600"
-          >
-            Home
-          </Link>
-
-          {/* কন্ডিশনাল রেন্ডারিং শুরু */}
-          {status === "authenticated" ? (
-            /* --- যদি ইউজার লগইন থাকে --- */
-            <>
-              <Link
-                href="/my-bookings"
-                className="font-bold text-slate-600 hover:text-teal-600"
-              >
-                My Bookings
-              </Link>
-
-              <div className="flex items-center gap-3">
-                {/* ইউজারের নাম বা ছবি দেখাতে চাইলে */}
-                <span className="text-sm font-medium text-slate-500 hidden md:block">
-                  Hi, {session?.user?.name?.split(" ")[0]}
-                </span>
-
-                <button
-                  onClick={() => signOut({ callbackUrl: "/login" })}
-                  className="bg-red-50 text-slate-900 px-5 py-2 rounded-xl font-bold hover:bg-red-100 transition-all"
-                >
-                  Logout
-                </button>
-              </div>
-            </>
-          ) : (
-            /* --- যদি লগইন না থাকে বা স্ট্যাটাস loading হয় --- */
-            status !== "loading" && (
-              <>
-                <Link
-                  href="/login"
-                  className="font-bold text-slate-600 hover:text-teal-600"
-                >
-                  Login
-                </Link>
-                <Link
-                  href="/register"
-                  className="bg-slate-900 text-white px-6 py-2.5 rounded-xl font-bold hover:bg-teal-600 transition-all"
-                >
-                  Register
-                </Link>
-              </>
-            )
-          )}
-        </div>
-      </div>
-    </nav>
-  );
-}

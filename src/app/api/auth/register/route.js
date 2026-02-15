@@ -3,7 +3,7 @@ import bcrypt from "bcryptjs";
 import connect from "@/utils/db";
 import User from "@/models/User";
 export const POST = async (request) => {
-  const { name, email, password } = await request.json();
+  const { name, email, password, nid, contact } = await request.json();
   await connect();
 
   const hashPassword = await bcrypt.hash(password, 5);
@@ -12,6 +12,8 @@ export const POST = async (request) => {
     name,
     email,
     password: hashPassword,
+    nid,
+    contact,
   });
   try {
     await newUser.save();
